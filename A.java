@@ -4,6 +4,7 @@
  * Fachri Ahmad Hanif - 6182501004
  */
 import java.util.Scanner;
+import java.lang.Math;
 public class A {
     /**
      * Sorting array dari yang terkecil ke terbesar
@@ -41,7 +42,26 @@ public class A {
         return jumlahAkumulatif;
     }
 
-     public static double[] operasiValiditasMaxMin (double[]validitas,double []arr){
+    public static double median(double arr[])
+    {
+        int mid = (arr.length) / 2;
+        double med = arr[mid] + (0.5 * (arr[mid+1] - arr[mid]));
+        return med;
+    }
+
+    public static double simpanganBaku(double arr[], double mean) 
+    {
+        double res = 0;
+        for (int i = 0; i < arr.length; i++)
+        {
+            res += ((arr[i] - mean) * (arr[i] - mean));
+        }
+        res /= arr.length;
+
+        return Math.sqrt(res);
+    }
+
+    public static double[] operasiValiditasMaxMin (double[]validitas,double []arr){
         double validitasAkumulatif = 0;
         double maximumNilai = 0;
         double minimumNilai = Double.MAX_VALUE;
@@ -76,11 +96,16 @@ public class A {
         double mean = operasiMean(arr);  // call operasi yang mencari mean
         double [] ValiditasMaxMin = new double[3];  // array untuk menentukan 3 hal yaitu validitas , nilai Maximum , dan nilai minimum 
         ValiditasMaxMin = operasiValiditasMaxMin(ValiditasMaxMin,arr); // jujur aku malas buat metode buat satu satu 
+        double median = median(arr);
+        double simpanganBaku = simpanganBaku(arr, mean);
 
-        System.out.println(mean+"yes"); // Output mean
-        System.out.println(ValiditasMaxMin[0]+"yes");
-        System.out.println(ValiditasMaxMin[1]+"yes");
-        System.out.println(ValiditasMaxMin[2]+"yes");
+        // Output akhir
+        System.out.printf("Jumlah data valid: %d%n", (int)ValiditasMaxMin[0]);
+        System.out.printf("Mean: %.2f%n", mean); // Output mean
+        System.out.printf("Median: %.2f%n", median);
+        System.out.printf("s: %.2f%n", simpanganBaku);
+        System.out.printf("Min: %.2f%n", ValiditasMaxMin[2]);
+        System.out.printf("Max: %.2f%n", ValiditasMaxMin[1]);
 
         sc.close(); // Menutup scanner;
     }
