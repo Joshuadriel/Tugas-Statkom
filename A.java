@@ -3,8 +3,8 @@
  * Joshua Adriel Suhandi - 6182501026
  * Fachri Ahmad Hanif - 6182501004
  */
+import java.util.ArrayList;
 import java.util.Scanner;
-import java.lang.Math;
 public class A {
     /**
      * Sorting array dari yang terkecil ke terbesar
@@ -120,6 +120,21 @@ public class A {
 
         return q;
     }
+     public static   ArrayList<Double> searchingformyops(double arr[], double IQR, double Q1 , double Q3)
+    {
+            ArrayList<Double> outlier = new ArrayList<>();
+            for (int q = 0 ; q < arr.length ;q++){
+                if (arr[q]< Q1 - (1.5*(IQR)) ){
+                outlier.add(arr[q]);
+                }
+                else if (arr[q]> Q3 + (1.5*(IQR))){
+                    outlier.add(arr[q]);
+                }
+            }
+       
+
+        return outlier ;
+    }
     
     public static void main(String[] args) {
         // Input data
@@ -139,6 +154,13 @@ public class A {
         double median = median(arr);
         double simpanganBaku = simpanganBaku(arr, mean);
         double quartile[] = quartileArr(arr);
+        double IQR = quartile[2] - quartile[0];
+        ArrayList<Double> outlier = new ArrayList<>();
+        outlier = searchingformyops(arr,  IQR, quartile[0], quartile[2]);
+        int outlierTotal = outlier.size();
+        int n = 1 ;
+
+        
 
         // Output akhir
         System.out.printf("Jumlah data valid: %d%n", (int)ValiditasMaxMin[0]);
@@ -149,6 +171,12 @@ public class A {
         System.out.printf("Q1: %.2f%n", quartile[0]);
         System.out.printf("Q3: %.2f%n", quartile[2]);
         System.out.printf("Max: %.2f%n", ValiditasMaxMin[1]);
+        System.out.printf("IQR: %.2f%n", IQR);
+        System.out.printf("Outlier: %d%n", outlierTotal);
+        for (double x : outlier) {
+            System.out.printf("Outlier %d: %.2f%n", n,x);
+            n++;
+        }
 
         sc.close(); // Menutup scanner;
     }
