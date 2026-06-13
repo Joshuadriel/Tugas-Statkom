@@ -160,8 +160,6 @@ public class A {
         int outlierTotal = outlier.size();
         int n = 1 ;
 
-        
-
         // Output akhir
         System.out.printf("Jumlah data valid: %d%n", (int)ValiditasMaxMin[0]);
         System.out.printf("Mean: %.2f%n", mean); // Output mean
