@@ -1,3 +1,8 @@
+/**
+ * Kode disusun oleh:
+ * Joshua Adriel Suhandi - 6182501026
+ * Fachri Ahmad Hanif - 6182501004
+ */
 import java.util.Scanner;
 public class A {
     /**
@@ -27,6 +32,36 @@ public class A {
 
         return arr;
     }
+    public static double operasiMean (double[]arr){
+        double jumlahAkumulatif = 0;
+        for (int q = 0 ; q < arr.length ; q++ ){
+            jumlahAkumulatif += arr[q];
+        }
+        jumlahAkumulatif /= arr.length;
+        return jumlahAkumulatif;
+    }
+
+     public static double[] operasiValiditasMaxMin (double[]validitas,double []arr){
+        double validitasAkumulatif = 0;
+        double maximumNilai = 0;
+        double minimumNilai = Double.MAX_VALUE;
+        for (int q = 0 ; q < arr.length ;q++){
+            if (arr[q]!= 0){
+                validitasAkumulatif++;
+            }
+            if (arr[q]> maximumNilai){
+             maximumNilai = arr[q];
+            }
+            if (arr[q] < minimumNilai){
+                minimumNilai = arr[q];
+            }
+        }
+        validitas[0]= validitasAkumulatif;
+        validitas[1] = maximumNilai;
+        validitas[2]= minimumNilai;
+        return validitas;
+      
+    }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in); // Import scanner
         double arr[] = new double[24]; // Array untuk menyimpan nilai-nilai datanya
@@ -38,6 +73,14 @@ public class A {
 
         // Mengolah data
         arr = sorting(arr); // Menyortir array terlebih dahulu dari yang terkecil ke terbesar
+        double mean = operasiMean(arr);  // call operasi yang mencari mean
+        double [] ValiditasMaxMin = new double[3];  // array untuk menentukan 3 hal yaitu validitas , nilai Maximum , dan nilai minimum 
+        ValiditasMaxMin = operasiValiditasMaxMin(ValiditasMaxMin,arr); // jujur aku malas buat metode buat satu satu 
+
+        System.out.println(mean+"yes"); // Output mean
+        System.out.println(ValiditasMaxMin[0]+"yes");
+        System.out.println(ValiditasMaxMin[1]+"yes");
+        System.out.println(ValiditasMaxMin[2]+"yes");
 
         sc.close(); // Menutup scanner;
     }
