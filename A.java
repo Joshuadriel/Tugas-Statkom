@@ -35,9 +35,9 @@ public class A {
     }
 
     /**
-     * 
-     * @param arr
-     * @return
+     * Mencari rata-rata
+     * @param arr = array yang berisi data-data input
+     * @return hasil perhitungan mean
      */
     public static double operasiMean (double[]arr){
         double jumlahAkumulatif = 0;
@@ -49,9 +49,9 @@ public class A {
     }
 
     /**
-     * 
-     * @param arr
-     * @return
+     * Mencari median
+     * @param arr = array berisi data-data input
+     * @return nilai median
      */
     public static double median(double arr[])
     {
@@ -61,10 +61,10 @@ public class A {
     }
 
     /**
-     * 
-     * @param arr
-     * @param mean
-     * @return
+     * Mencari simpangan baku
+     * @param arr = array yang berisi data-data
+     * @param mean = nilai rata-rata yang kita dapatkan
+     * @return nilai simpangan baku
      */
     public static double simpanganBaku(double arr[], double mean) 
     {
@@ -79,10 +79,13 @@ public class A {
     }
 
     /**
-     * 
-     * @param validitas
-     * @param arr
-     * @return
+     * Mencari jumlah data valid, min dan max
+     * indeks 0 = jumlah data valid
+     * indeks 1 = angka min
+     * indeks 2 = angka max
+     * @param validitas = array untuk menyimpan semua hasilnya
+     * @param arr = array berisi data-data
+     * @return array dari variabel validitas
      */
     public static double[] operasiValiditasMaxMin (double[]validitas,double []arr){
         double validitasAkumulatif = 0;
@@ -107,9 +110,12 @@ public class A {
     }
 
     /**
-     * 
-     * @param arr
-     * @return
+     * Mencari Q1, Q2 dan Q3
+     * Nilai Q1 ada di indeks 0
+     * Nilai Q2 ada di indeks 1
+     * Nilai Q3 ada di indeks 2
+     * @param arr = array berisi data-data input
+     * @return array berisi nilai-nilai quartile
      */
     public static double[] quartileArr(double arr[])
     {
@@ -120,18 +126,26 @@ public class A {
 
         return q;
     }
-     public static   ArrayList<Double> searchingformyops(double arr[], double IQR, double Q1 , double Q3)
+
+    /**
+     * Mencari outlier-outlier yang ada
+     * @param arr = array berisi data-data input
+     * @param IQR = nilai dari interquartile range yang sudah kita hitung
+     * @param Q1 = nilai dari q1
+     * @param Q3 = nilai dari q2
+     * @return ArrayList yang berisi data-data yang dianggap sebagai outlier
+     */
+     public static ArrayList<Double> searchingformyops(double arr[], double IQR, double Q1 , double Q3)
     {
-            ArrayList<Double> outlier = new ArrayList<>();
-            for (int q = 0 ; q < arr.length ;q++){
-                if (arr[q]< Q1 - (1.5*(IQR)) ){
+        ArrayList<Double> outlier = new ArrayList<>();
+        for (int q = 0 ; q < arr.length ;q++){
+            if (arr[q]< Q1 - (1.5*(IQR)) ){
                 outlier.add(arr[q]);
-                }
-                else if (arr[q]> Q3 + (1.5*(IQR))){
-                    outlier.add(arr[q]);
-                }
             }
-       
+            else if (arr[q]> Q3 + (1.5*(IQR))){
+                outlier.add(arr[q]);
+            }
+        }
 
         return outlier ;
     }
@@ -150,7 +164,7 @@ public class A {
         arr = sorting(arr); // Menyortir array terlebih dahulu dari yang terkecil ke terbesar
         double mean = operasiMean(arr);  // call operasi yang mencari mean
         double [] ValiditasMaxMin = new double[3];  // array untuk menentukan 3 hal yaitu validitas , nilai Maximum , dan nilai minimum 
-        ValiditasMaxMin = operasiValiditasMaxMin(ValiditasMaxMin,arr); // jujur aku malas buat metode buat satu satu 
+        ValiditasMaxMin = operasiValiditasMaxMin(ValiditasMaxMin,arr); 
         double median = median(arr);
         double simpanganBaku = simpanganBaku(arr, mean);
         double quartile[] = quartileArr(arr);
@@ -162,7 +176,7 @@ public class A {
 
         // Output akhir
         System.out.printf("Jumlah data valid: %d%n", (int)ValiditasMaxMin[0]);
-        System.out.printf("Mean: %.2f%n", mean); // Output mean
+        System.out.printf("Mean: %.2f%n", mean);
         System.out.printf("Median: %.2f%n", median);
         System.out.printf("s: %.2f%n", simpanganBaku);
         System.out.printf("Min: %.2f%n", ValiditasMaxMin[2]);
@@ -171,6 +185,7 @@ public class A {
         System.out.printf("Max: %.2f%n", ValiditasMaxMin[1]);
         System.out.printf("IQR: %.2f%n", IQR);
         System.out.printf("Outlier: %d%n", outlierTotal);
+        // Looping untuk output dari data-data outlier
         for (double x : outlier) {
             System.out.printf("Outlier %d: %.2f%n", n,x);
             n++;
