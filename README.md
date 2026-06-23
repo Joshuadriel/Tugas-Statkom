@@ -1,8 +1,3 @@
-Coba belajar aja dulu fachri github.
-Untuk sekedar commit mah nggak susah kok bwahahaha
+Dengan demikian, tugas akhir Statistika Komputasi saya nyataikan telah selesai.
 
-Command di terminal VS Codenya:
-1. git pull
-2. git add A.java
-3. git commit -m "Pesan"
-4. git push origin main
+TERIMA BANYAK FACHRI UNTUK KERJA SAMA DAN BANTUANNYA SELAMA INI! CHEERS:)
